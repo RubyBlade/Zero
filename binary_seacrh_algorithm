@@ -1,0 +1,29 @@
+def binary_search(arr, target)
+  low = 0
+  high = arr.length - 1
+
+  while low <= high
+    mid = (low + high) / 2
+    mid_val = arr[mid]
+
+    if mid_val == target
+      return mid # Найдено значение, возвращаем индекс
+    elsif mid_val < target
+      low = mid + 1
+    else
+      high = mid - 1
+    end
+  end
+
+  return nil # Значение не найдено
+end
+
+# Пример использования
+arr = ["apple", "banana", "grape", "orange", "pineapple", "strawberry", "watermelon"]
+target = "orange"
+index = binary_search(arr.sort, target)
+if index
+  puts "#{target} найден в индексе #{index}."
+else
+  puts "#{target} не найден в массиве."
+end

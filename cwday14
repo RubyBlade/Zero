@@ -1,0 +1,34 @@
+def encrypt(text, n)
+  return text if n <= 0
+  
+  n.times do
+    odd_chars = text.chars.each_with_index.select { |_, i| i.odd? }.map(&:first).join
+    even_chars = text.chars.each_with_index.select { |_, i| i.even? }.map(&:first).join
+    text = odd_chars + even_chars
+  end
+  
+  text
+end
+
+def decrypt(encrypted_text, n)
+  return encrypted_text if n <= 0
+  
+  length = encrypted_text.length
+  half = length / 2
+  
+  n.times do
+    odd_chars = encrypted_text[0...half]
+    even_chars = encrypted_text[half..-1]
+    
+    decrypted_text = ""
+    
+    half.times do |i|
+      decrypted_text += even_chars[i] unless even_chars[i].nil?
+      decrypted_text += odd_chars[i] unless odd_chars[i].nil?
+    end
+    
+    encrypted_text = decrypted_text
+  end
+  
+  encrypted_text
+end
